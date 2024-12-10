@@ -10,3 +10,8 @@ pnpm i recharts
 pnpm i react-dnd
 pnpm i react-dnd-html5-backend
 pnpm i gantt-task-react
+pnpm i -D @types/node
+pnpm i -D @types/uuid
+pnpm i -D @types/numeral
+pnpm i -D prettier prettier-plugin-tailwindcss
+pnpm i -D tailwind-merge
