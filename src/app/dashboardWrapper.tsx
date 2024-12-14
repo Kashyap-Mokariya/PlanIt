@@ -7,8 +7,8 @@ import React, { ReactNode, useDebugValue, useEffect } from 'react'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
-    const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed)
-    const isDarkMode = useAppSelector((state) => state.global.isDarkMode)
+    const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
+    const isDarkMode = useAppSelector((state) => state.theme.isDarkMode)
 
     useEffect(() => {
         if (isDarkMode) {
