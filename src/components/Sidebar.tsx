@@ -3,7 +3,7 @@
 import { Home, Icon, LockIcon, LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from './redux'
 import Link from 'next/link'
 
@@ -27,7 +27,7 @@ const Sidebar = () => {
 
                 {/* Teams Section */}
                 <div className='flex items-center gap-5 border-y-[1.5px] border-gray-200 px-6 py-4 dark:border-gray-700'>
-                    <Image src="/main.jpeg" alt='logo' width={40} height={40} priority={true}/>
+                    <Image src="/main.jpeg" alt='logo' width={40} height={40} priority={true} />
 
                     <div>
                         <h3 className='text-md font-bold tracking-wide dark:text-gray-200'>
@@ -55,7 +55,7 @@ const Sidebar = () => {
     )
 }
 
-interface SidebarLinkProps{
+interface SidebarLinkProps {
     href: string
     icon: LucideIcon
     label: string
@@ -70,11 +70,27 @@ const SidebarLink = ({
 }: SidebarLinkProps) => {
     const pathName = usePathname()
     const isActive = pathName === href || (pathName === "/" && href === "/dashboard")
-    const screenWidth = window.innerWidth
+    // const screenWidth = window.innerWidth
+    const [screenWidth, setScreenWidth] = useState(0);
 
     const dispatch = useAppDispatch()
 
-    const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed)
+    // const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed)
+
+    useEffect(() => {
+        // Access window only after component mounts (client-side)
+        setScreenWidth(window.innerWidth);
+
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
         <Link href={href} className='w-full'>

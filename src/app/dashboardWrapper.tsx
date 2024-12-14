@@ -11,10 +11,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode)
 
     useEffect(() => {
-        if(isDarkMode){
+        if (isDarkMode) {
             document.documentElement.classList.add('dark')
         }
-        else{
+        else {
             document.documentElement.classList.remove('dark')
         }
     })
