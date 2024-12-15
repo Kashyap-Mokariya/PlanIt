@@ -1,18 +1,22 @@
 "use client"
 
-import { Home, Icon, LockIcon, LucideIcon } from 'lucide-react'
+import { Home, Icon, LockIcon, LucideIcon, X } from 'lucide-react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from './redux'
 import Link from 'next/link'
+import { setIsSidebarCollapsed } from '@/state'
 
 const Sidebar = () => {
 
     const [showProjects, setShowProjects] = useState(true)
     const [showPriority, setShowPriority] = useState(true)
 
-    const sidebarClasses = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white w-64`
+    const dispatch = useAppDispatch()
+    const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
+
+    const sidebarClasses = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}`
 
     return (
         <div className={sidebarClasses}>
@@ -23,6 +27,15 @@ const Sidebar = () => {
                     <div className='text-xl font-bold text-gray-800 dark:text-white'>
                         PlanIt
                     </div>
+
+                    {isSidebarCollapsed ? null : (
+                        <button
+                            className='py-3'
+                            onClick={() => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
+                        >
+                            <X className='h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white' />
+                        </button>
+                    )}
                 </div>
 
                 {/* Teams Section */}
@@ -74,7 +87,6 @@ const SidebarLink = ({
     const [screenWidth, setScreenWidth] = useState(0);
 
     const dispatch = useAppDispatch()
-
     const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
 
     useEffect(() => {
