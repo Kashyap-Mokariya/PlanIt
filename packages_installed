@@ -15,3 +15,7 @@ pnpm i -D @types/uuid
 pnpm i -D @types/numeral
 pnpm i -D prettier prettier-plugin-tailwindcss
 pnpm i -D tailwind-merge
+pnpm i react-redux
+pnpm i @reduxjs/toolkit
+pnpm i redux-persist
+pnpm i dotenv

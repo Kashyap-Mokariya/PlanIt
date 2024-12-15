@@ -7,7 +7,7 @@ import DashboardWrapper from "./dashboardWrapper";
 export const metadata: Metadata = {
   title: "PlanIt",
   description: "Project Management App",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/main.ico"}],
 };
 
 export default function RootLayout({

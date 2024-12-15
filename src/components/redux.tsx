@@ -144,12 +144,12 @@ const storage =
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["global"], // Only persist `global` reducer
+    whitelist: ["theme"], // Only persist `global` reducer
 };
 
 // Combine reducers
 const rootReducer = combineReducers({
-    global: globalReducer,
+    theme: globalReducer,
     [api.reducerPath]: api.reducer,
 });
 
