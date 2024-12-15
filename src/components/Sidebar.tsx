@@ -75,7 +75,7 @@ const SidebarLink = ({
 
     const dispatch = useAppDispatch()
 
-    // const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
+    const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
 
     useEffect(() => {
         // Access window only after component mounts (client-side)
