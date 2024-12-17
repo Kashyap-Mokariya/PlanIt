@@ -10,8 +10,8 @@ import Image from "next/image";
 import "@/styles/globals.css";
 
 const Sidebar = () => {
-    const [showProjects, setShowProjects] = useState(false)
-    const [showPriority, setShowPriority] = useState(false)
+    const [showProjects, setShowProjects] = useState(true)
+    const [showPriority, setShowPriority] = useState(true)
 
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed);

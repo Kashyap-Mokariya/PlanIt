@@ -16,7 +16,7 @@ const Navbar = () => {
                 {!isSidebarCollapsed ? null : (
                     <button
                         onClick={() => dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))}
-                        className="fixed top-2.5 left-4 z-50 p-2 rounded-md bg-gray-100 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all"
+                        className="fixed top-2.5 left-4 p-2 rounded-md bg-gray-100 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all"
                     >
                         <Menu className="h-6 w-6 text-gray-800 dark:text-white" />
                     </button>
