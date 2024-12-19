@@ -19,3 +19,7 @@ pnpm i react-redux
 pnpm i @reduxjs/toolkit
 pnpm i redux-persist
 pnpm i dotenv
+pnpm i -D typescript ts-node
+pnpm i express cors dotenv helmet morgan
+pnpm add -D @types/body-parser
+pnpm i -D rimraf concurrently nodemon @types/cors @types/express @types/morgan @types/node
