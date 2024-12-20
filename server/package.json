@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"build": "rimraf dist && tsc",
 		"start": "pnpm run build && node dist/index.js",
-		"dev": "pnpm run build && concurrently \"tsc -w\" \"nodemon --exec ts-node src/index.ts\"",
+		"dev": "pnpm run build && concurrently \"tsc -w\" \"nodemon --exec ts-node -r tsconfig-paths/register src/index.ts\"",
 		"seed": "ts-node prisma/seed.ts"
 	},
 	"keywords": [],
@@ -23,16 +23,19 @@
 		"nodemon": "^3.1.9",
 		"rimraf": "^6.0.1",
 		"ts-node": "^10.9.2",
+		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.7.2"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.1.0",
+		"@t3-oss/env-nextjs": "^0.11.1",
 		"body-parser": "^1.20.3",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.7",
 		"express": "^4.21.2",
 		"helmet": "^8.0.0",
 		"morgan": "^1.10.0",
-		"prisma": "^6.1.0"
+		"prisma": "^6.1.0",
+		"zod": "^3.24.1"
 	}
 }

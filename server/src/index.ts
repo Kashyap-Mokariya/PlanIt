@@ -4,8 +4,8 @@ import bodyParser from "body-parser"
 import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
-
 // ROUTE IMPORTS
+import projectRoutes from "./routes/projectRoutes"
 
 // CONFIGURATIONS
 
@@ -24,6 +24,8 @@ app.use(cors())
 app.get("/", (req, res) => {
     res.send("This is the home page")
 })
+
+app.use("/projects", projectRoutes)
 
 const port = process.env.PORT || 3000
 
