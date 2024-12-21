@@ -33,7 +33,7 @@ const createProject = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 endDate
             }
         });
-        res.json(newProject);
+        res.status(201).json(newProject);
     }
     catch (error) {
         res.status(500).json({ message: `Error creating the project : ${error.message}` });
