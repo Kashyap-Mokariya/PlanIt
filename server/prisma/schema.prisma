@@ -21,8 +21,8 @@ model User {
     assignedTasks   Task[]           @relation("TaskAssignee")
     taskAssignments TaskAssignment[]
     comments        Comment[]
-    team            Team?           @relation(fields: [teamId], references: [id])
-    attachments      Attachment[]
+    team            Team?            @relation(fields: [teamId], references: [id])
+    attachments     Attachment[]
 }
 
 model Team {
