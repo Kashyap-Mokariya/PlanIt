@@ -8,10 +8,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import "@/styles/globals.css";
+import { useGetProjectsQuery } from "@/state/api";
 
 const Sidebar = () => {
     const [showProjects, setShowProjects] = useState(true)
     const [showPriority, setShowPriority] = useState(true)
+
+    const { data: projects } = useGetProjectsQuery()
 
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed);
@@ -20,7 +23,7 @@ const Sidebar = () => {
         <>
             {/* Sidebar Container */}
             <div
-                className={`fixed top-0 left-0 h-full bg-white dark:bg-black shadow-lg transition-all duration-300 z-40 ${isSidebarCollapsed ? "-translate-x-full" : "translate-x-0"
+                className={`fixed top-0 left-0 h-full bg-white dark:bg-black shadow-lg transition-all duration-300 z-40 overflow-y-auto ${isSidebarCollapsed ? "-translate-x-full" : "translate-x-0"
                     } w-64`}
             >
                 {/* Sidebar Header */}
@@ -65,13 +68,22 @@ const Sidebar = () => {
                         className="flex w-full items-center justify-between px-8 py-3 text-gray-500"
                     >
                         <span>Projects</span>
-    
+
                         {showProjects ? (
                             <ChevronUp className="h-5 w-5" />
                         ) : (
                             <ChevronDown className="h-5 w-5" />
                         )}
                     </button>
+
+                    {showProjects && projects?.map((project) => 
+                        (<SidebarLink
+                            key={project.id}
+                            icon={Briefcase}
+                            label={project.name}
+                            href={`/projects/${project.id}`}
+                        />)
+                    )}
                 </div>
 
                 {/* Priorities Section */}
@@ -81,7 +93,7 @@ const Sidebar = () => {
                         className="flex w-full items-center justify-between px-8 py-3 text-gray-500"
                     >
                         <span>Priority</span>
-    
+
                         {showPriority ? (
                             <ChevronUp className="h-5 w-5" />
                         ) : (
