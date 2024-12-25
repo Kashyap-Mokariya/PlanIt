@@ -36,7 +36,7 @@ export interface User {
 
 export interface Attachment {
     id: number
-    fileUrl: string
+    fileURL: string
     fileName: string
     taskId: number
     uploadedById: number
@@ -83,7 +83,7 @@ export const api = createApi({
         }),
 
         getTasks: build.query<Task[], { projectId: number }>({
-            query: (projectId) => `tasks?projectId=${projectId}`,
+            query: ({ projectId }) => `tasks?projectId=${projectId}`,
             providesTags: (result) =>
                 result
                     ? result.map(({ id }) => ({
