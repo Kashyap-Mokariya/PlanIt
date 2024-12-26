@@ -24,10 +24,10 @@ const BoardView = ({ id, setIsModalNewTaskOpen }: BoardProps) => {
     }
 
     if (isLoading)
-        return <div>Loading...</div>
+        return <div className='dark:text-white'>Loading...</div>
 
     if (error)
-        return <div>An error occured while fetching tasks</div>
+        return <div className='dark:text-white'>An error occured while fetching tasks</div>
 
     return (
         <DndProvider backend={HTML5Backend}>
