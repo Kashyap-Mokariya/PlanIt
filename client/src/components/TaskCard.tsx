@@ -94,11 +94,11 @@ const TaskCard = ({ task }: Props) => {
                 {/* Dates Section */}
                 <div className="grid gap-2 text-sm">
                     <div className="flex gap-2">
-                        <span className="font-medium text-gray-500 dark:text-gray-400">Start Date:</span>
+                        <span className="font-medium text-gray-500 dark:text-gray-400">Start Date :</span>
                         <span>{task.startDate ? format(new Date(task.startDate), "P") : "Not set"}</span>
                     </div>
                     <div className="flex gap-2">
-                        <span className="font-medium text-gray-500 dark:text-gray-400">Due Date:</span>
+                        <span className="font-medium text-gray-500 dark:text-gray-400">Due Date :</span>
                         <span>{task.dueDate ? format(new Date(task.dueDate), "P") : "Not set"}</span>
                     </div>
                 </div>
