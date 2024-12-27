@@ -1094,7 +1094,9 @@ type Props = {
 type TaskTypeItems = "task" | "milestone" | "project";
 
 const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
-    const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+    const isDarkMode = useAppSelector((state) => state.theme.isDarkMode)
+    const isSidebarCollapsed = useAppSelector((state) => state.theme.isSidebarCollapsed)
+
     const {
         data: tasks,
         error,
@@ -1133,7 +1135,13 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     if (error || !tasks) return <div>An error occurred while fetching tasks</div>;
 
     return (
-        <div className="px-4 xl:px-6">
+        <div className="px-4 xl:px-6"
+            style={{
+                width: isSidebarCollapsed ? "96vw" : "83vw",
+                height: '100%',
+                overflowX: 'hidden',
+                overflowY: 'hidden'
+            }}>
             <div className="flex flex-wrap items-center justify-between gap-2 py-5">
                 <h1 className="me-2 text-lg font-bold dark:text-white">
                     Project Tasks Timeline
@@ -1151,14 +1159,10 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
                 </div>
             </div>
 
-            <div className="rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white">
-                <div style={{
-                    width: '80vw',
-                    height: '100%',
-                    overflowX: 'auto',
-                    overflowY: 'hidden'
-                }}>
-                    <div className={`timeline max-w-[100vw] sm:max-w-[100vw] md:max-w-[100vw] lg:max-w-[100vw] 2xl:max-w-[100vw]`}>
+            <div className="rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white"
+                >
+                <div>
+                    <div className={`timeline`}>
                         <Gantt
                             tasks={ganttTasks}
                             {...displayOptions}
