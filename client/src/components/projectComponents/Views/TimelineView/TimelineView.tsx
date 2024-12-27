@@ -1153,29 +1153,29 @@ const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
 
             <div className="rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white">
                 <div style={{
-                    width: '100%',
+                    width: '80vw',
                     height: '100%',
                     overflowX: 'auto',
                     overflowY: 'hidden'
                 }}>
-                    <div className={`timeline max-w-[1600px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1200px] 2xl:max-w-[1440px]`}>
+                    <div className={`timeline max-w-[100vw] sm:max-w-[100vw] md:max-w-[100vw] lg:max-w-[100vw] 2xl:max-w-[100vw]`}>
                         <Gantt
                             tasks={ganttTasks}
                             {...displayOptions}
                             columnWidth={displayOptions.viewMode === ViewMode.Month || ViewMode.Week || ViewMode.Day ? 150 : 100}
-                            listCellWidth="250px"
+                            listCellWidth="100px"
                             barBackgroundColor={isDarkMode ? "#101214" : "#aeb8c2"}
                             barBackgroundSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
                         />
                     </div>
-                </div>
-                <div className="px-4 pb-5 pt-1">
-                    <button
-                        className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
-                        onClick={() => setIsModalNewTaskOpen(true)}
-                    >
-                        Add New Task
-                    </button>
+                    <div className="px-4 pb-5 pt-1">
+                        <button
+                            className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+                            onClick={() => setIsModalNewTaskOpen(true)}
+                        >
+                            Add New Task
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
