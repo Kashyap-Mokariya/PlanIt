@@ -83,7 +83,7 @@
 //                         barProgressSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
 //                     />
 //                 </div>
-                
+
 //                 <div className='px-4 pb-5 pt-1'>
 //                     <button
 //                         className='flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600'
@@ -870,205 +870,309 @@
 
 // export default TimelineView;
 
-import React, { useMemo, useState } from 'react';
-import { useAppSelector } from '@/components/redux';
-import { Task, useGetTasksQuery } from '@/state/api';
+// import React, { useMemo, useState } from 'react';
+// import { useAppSelector } from '@/components/redux';
+// import { Task, useGetTasksQuery } from '@/state/api';
 
-const CELL_WIDTH = 140;
-const ROW_HEIGHT = 60;
-const LIST_WIDTH = 300;
+// const CELL_WIDTH = 140;
+// const ROW_HEIGHT = 60;
+// const LIST_WIDTH = 300;
 
-const TimelineView = ({ id, setIsModalNewTaskOpen }) => {
+// const TimelineView = ({ id, setIsModalNewTaskOpen }) => {
+//     const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
+//     const { data: tasks, isLoading, error } = useGetTasksQuery({ projectId: Number(id) });
+//     const [viewMode, setViewMode] = useState('Month');
+
+//     const getDateRange = (tasks) => {
+//         if (!tasks?.length) return { start: new Date(), end: new Date() };
+
+//         const dates = tasks.flatMap(task => [new Date(task.startDate), new Date(task.dueDate)]);
+//         const minDate = new Date(Math.min(...dates));
+//         const maxDate = new Date(Math.max(...dates));
+
+//         // Adjust range based on view mode
+//         switch (viewMode) {
+//             case 'Week':
+//                 minDate.setDate(minDate.getDate() - minDate.getDay());
+//                 maxDate.setDate(maxDate.getDate() + (6 - maxDate.getDay()));
+//                 break;
+//             case 'Day':
+//                 break;
+//             default: // Month
+//                 minDate.setDate(1);
+//                 maxDate.setMonth(maxDate.getMonth() + 1);
+//                 maxDate.setDate(0);
+//         }
+
+//         return { start: minDate, end: maxDate };
+//     };
+
+//     const { timelineData, processedTasks } = useMemo(() => {
+//         if (!tasks?.length) return { timelineData: [], processedTasks: [] };
+
+//         const dateRange = getDateRange(tasks);
+//         const periods = [];
+//         const currentDate = new Date(dateRange.start);
+
+//         while (currentDate <= dateRange.end) {
+//             let label;
+//             let next;
+
+//             switch (viewMode) {
+//                 case 'Week':
+//                     label = `Week ${Math.ceil(currentDate.getDate() / 7)}`;
+//                     next = new Date(currentDate);
+//                     next.setDate(currentDate.getDate() + 7);
+//                     break;
+//                 case 'Day':
+//                     label = currentDate.toLocaleDateString('default', { weekday: 'short', month: 'short', day: 'numeric' });
+//                     next = new Date(currentDate);
+//                     next.setDate(currentDate.getDate() + 1);
+//                     break;
+//                 default: // Month
+//                     label = currentDate.toLocaleString('default', { month: 'short', year: 'numeric' });
+//                     next = new Date(currentDate);
+//                     next.setMonth(currentDate.getMonth() + 1);
+//             }
+
+//             periods.push({
+//                 date: new Date(currentDate),
+//                 label
+//             });
+
+//             currentDate.setTime(next.getTime());
+//         }
+
+//         const processedTasks = tasks.map(task => ({
+//             ...task,
+//             startDate: new Date(task.startDate),
+//             dueDate: new Date(task.dueDate),
+//             progress: task.points ? (task.points / 10) * 100 : 0
+//         }));
+
+//         return { timelineData: { periods }, processedTasks };
+//     }, [tasks, viewMode]);
+
+//     const getTaskPosition = (task) => {
+//         if (!timelineData.periods?.length) return { left: 0, width: 0 };
+
+//         const totalDuration = timelineData.periods[timelineData.periods.length - 1].date.getTime() -
+//             timelineData.periods[0].date.getTime();
+//         const startOffset = Math.max(task.startDate.getTime() - timelineData.periods[0].date.getTime(), 0);
+//         const duration = task.dueDate.getTime() - task.startDate.getTime();
+
+//         const left = (startOffset / totalDuration) * (timelineData.periods.length * CELL_WIDTH);
+//         const width = (duration / totalDuration) * (timelineData.periods.length * CELL_WIDTH);
+
+//         return { left, width: Math.max(width, CELL_WIDTH / 4) };
+//     };
+
+//     if (isLoading) return <div className="flex items-center justify-center h-full dark:text-white">Loading...</div>;
+//     if (error || !tasks) return <div className="flex items-center justify-center h-full dark:text-white">Error loading tasks</div>;
+
+//     return (
+//         <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 w-full max-w-screen-xl">
+//             <div className="flex items-center justify-between p-6 bg-white dark:bg-gray-800 border-b">
+//                 <h2 className="text-xl font-semibold dark:text-white">Project Timeline</h2>
+//                 <select
+//                     className="px-4 py-2 border rounded-md bg-white dark:bg-gray-800 dark:text-white"
+//                     value={viewMode}
+//                     onChange={(e) => setViewMode(e.target.value)}
+//                 >
+//                     <option value="Month">Month View</option>
+//                     <option value="Week">Week View</option>
+//                     <option value="Day">Day View</option>
+//                 </select>
+//             </div>
+
+//             <div className="flex-1 overflow-hidden">
+//                 <div className="flex h-full">
+//                     {/* Task List - Fixed Left Column */}
+//                     <div className="flex-none w-[300px] bg-white dark:bg-gray-800 border-r shadow-lg">
+//                         <div className="sticky top-0 z-20 border-b bg-gray-50 dark:bg-gray-900 p-4">
+//                             <div className="font-medium dark:text-white">Tasks</div>
+//                         </div>
+//                         <div className="space-y-2 p-2">
+//                             {processedTasks.map((task, index) => (
+//                                 <div key={task.id}
+//                                     className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm border"
+//                                     style={{ height: ROW_HEIGHT - 16 }}>
+//                                     <div className="font-medium dark:text-white truncate">{task.title}</div>
+//                                     <div className="text-sm text-gray-500 dark:text-gray-400">
+//                                         {task.startDate.toLocaleDateString()} - {task.dueDate.toLocaleDateString()}
+//                                     </div>
+//                                 </div>
+//                             ))}
+//                         </div>
+//                     </div>
+
+//                     {/* Timeline Grid with Horizontal Scroll */}
+//                     <div className="flex-1 overflow-x-auto">
+//                         <div style={{
+//                             width: timelineData.periods.length * CELL_WIDTH,
+//                             minWidth: '100%'
+//                         }}>
+//                             {/* Periods Header */}
+//                             <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b">
+//                                 <div className="flex">
+//                                     {timelineData.periods.map((period, index) => (
+//                                         <div
+//                                             key={index}
+//                                             className="text-sm px-4 py-3 border-r dark:text-white font-medium"
+//                                             style={{ width: CELL_WIDTH }}
+//                                         >
+//                                             {period.label}
+//                                         </div>
+//                                     ))}
+//                                 </div>
+//                             </div>
+
+//                             {/* Timeline Content */}
+//                             <div className="relative" style={{ height: processedTasks.length * ROW_HEIGHT }}>
+//                                 {/* Grid Background */}
+//                                 <div className="absolute inset-0 grid"
+//                                     style={{ gridTemplateColumns: `repeat(${timelineData.periods.length}, ${CELL_WIDTH}px)` }}>
+//                                     {timelineData.periods.map((_, index) => (
+//                                         <div key={index} className="border-r h-full" />
+//                                     ))}
+//                                 </div>
+
+//                                 {/* Task Bars */}
+//                                 {processedTasks.map((task, index) => {
+//                                     const { left, width } = getTaskPosition(task);
+//                                     return (
+//                                         <div
+//                                             key={task.id}
+//                                             className="absolute h-8 rounded-lg bg-blue-100 dark:bg-blue-900 border border-blue-300 dark:border-blue-700"
+//                                             style={{
+//                                                 left,
+//                                                 top: index * ROW_HEIGHT + (ROW_HEIGHT - 32) / 2,
+//                                                 width,
+//                                             }}
+//                                         >
+//                                             <div
+//                                                 className="h-full rounded-lg bg-blue-500 dark:bg-blue-600"
+//                                                 style={{ width: `${task.progress}%` }}
+//                                             />
+//                                             <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-blue-900 dark:text-blue-100">
+//                                                 {task.title}
+//                                             </span>
+//                                         </div>
+//                                     );
+//                                 })}
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+
+//                 <div className="sticky bottom-0 border-t p-4 bg-white dark:bg-gray-800">
+//                     <button
+//                         onClick={() => setIsModalNewTaskOpen(true)}
+//                         className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+//                     >
+//                         Add New Task
+//                     </button>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default TimelineView;
+
+import { useAppSelector } from "@/components/redux";
+import { useGetTasksQuery } from "@/state/api";
+import { DisplayOption, Gantt, ViewMode } from "gantt-task-react";
+import "gantt-task-react/dist/index.css";
+import React, { useMemo, useState } from "react";
+
+type Props = {
+    id: string;
+    setIsModalNewTaskOpen: (isOpen: boolean) => void;
+};
+
+type TaskTypeItems = "task" | "milestone" | "project";
+
+const Timeline = ({ id, setIsModalNewTaskOpen }: Props) => {
     const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
-    const { data: tasks, isLoading, error } = useGetTasksQuery({ projectId: Number(id) });
-    const [viewMode, setViewMode] = useState('Month');
+    const {
+        data: tasks,
+        error,
+        isLoading,
+    } = useGetTasksQuery({ projectId: Number(id) });
 
-    const getDateRange = (tasks) => {
-        if (!tasks?.length) return { start: new Date(), end: new Date() };
+    const [displayOptions, setDisplayOptions] = useState<DisplayOption>({
+        viewMode: ViewMode.Month,
+        locale: "en-US",
+    });
 
-        const dates = tasks.flatMap(task => [new Date(task.startDate), new Date(task.dueDate)]);
-        const minDate = new Date(Math.min(...dates));
-        const maxDate = new Date(Math.max(...dates));
+    const ganttTasks = useMemo(() => {
+        return (
+            tasks?.map((task) => ({
+                start: new Date(task.startDate as string),
+                end: new Date(task.dueDate as string),
+                name: task.title || "",
+                id: `Task-${task.id}`,
+                type: "task" as TaskTypeItems,
+                progress: task.points ? (task.points / 10) * 100 : 0,
+                isDisabled: false,
+            })) || []
+        );
+    }, [tasks]);
 
-        // Adjust range based on view mode
-        switch (viewMode) {
-            case 'Week':
-                minDate.setDate(minDate.getDate() - minDate.getDay());
-                maxDate.setDate(maxDate.getDate() + (6 - maxDate.getDay()));
-                break;
-            case 'Day':
-                break;
-            default: // Month
-                minDate.setDate(1);
-                maxDate.setMonth(maxDate.getMonth() + 1);
-                maxDate.setDate(0);
-        }
-
-        return { start: minDate, end: maxDate };
-    };
-
-    const { timelineData, processedTasks } = useMemo(() => {
-        if (!tasks?.length) return { timelineData: [], processedTasks: [] };
-
-        const dateRange = getDateRange(tasks);
-        const periods = [];
-        const currentDate = new Date(dateRange.start);
-
-        while (currentDate <= dateRange.end) {
-            let label;
-            let next;
-
-            switch (viewMode) {
-                case 'Week':
-                    label = `Week ${Math.ceil(currentDate.getDate() / 7)}`;
-                    next = new Date(currentDate);
-                    next.setDate(currentDate.getDate() + 7);
-                    break;
-                case 'Day':
-                    label = currentDate.toLocaleDateString('default', { weekday: 'short', month: 'short', day: 'numeric' });
-                    next = new Date(currentDate);
-                    next.setDate(currentDate.getDate() + 1);
-                    break;
-                default: // Month
-                    label = currentDate.toLocaleString('default', { month: 'short', year: 'numeric' });
-                    next = new Date(currentDate);
-                    next.setMonth(currentDate.getMonth() + 1);
-            }
-
-            periods.push({
-                date: new Date(currentDate),
-                label
-            });
-
-            currentDate.setTime(next.getTime());
-        }
-
-        const processedTasks = tasks.map(task => ({
-            ...task,
-            startDate: new Date(task.startDate),
-            dueDate: new Date(task.dueDate),
-            progress: task.points ? (task.points / 10) * 100 : 0
+    const handleViewModeChange = (
+        event: React.ChangeEvent<HTMLSelectElement>,
+    ) => {
+        setDisplayOptions((prev) => ({
+            ...prev,
+            viewMode: event.target.value as ViewMode,
         }));
-
-        return { timelineData: { periods }, processedTasks };
-    }, [tasks, viewMode]);
-
-    const getTaskPosition = (task) => {
-        if (!timelineData.periods?.length) return { left: 0, width: 0 };
-
-        const totalDuration = timelineData.periods[timelineData.periods.length - 1].date.getTime() -
-            timelineData.periods[0].date.getTime();
-        const startOffset = Math.max(task.startDate.getTime() - timelineData.periods[0].date.getTime(), 0);
-        const duration = task.dueDate.getTime() - task.startDate.getTime();
-
-        const left = (startOffset / totalDuration) * (timelineData.periods.length * CELL_WIDTH);
-        const width = (duration / totalDuration) * (timelineData.periods.length * CELL_WIDTH);
-
-        return { left, width: Math.max(width, CELL_WIDTH / 4) };
     };
 
-    if (isLoading) return <div className="flex items-center justify-center h-full dark:text-white">Loading...</div>;
-    if (error || !tasks) return <div className="flex items-center justify-center h-full dark:text-white">Error loading tasks</div>;
+    if (isLoading) return <div>Loading...</div>;
+    if (error || !tasks) return <div>An error occurred while fetching tasks</div>;
 
     return (
-        <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
-            <div className="flex items-center justify-between p-6 bg-white dark:bg-gray-800 border-b">
-                <h2 className="text-xl font-semibold dark:text-white">Project Timeline</h2>
-                <select
-                    className="px-4 py-2 border rounded-md bg-white dark:bg-gray-800 dark:text-white"
-                    value={viewMode}
-                    onChange={(e) => setViewMode(e.target.value)}
-                >
-                    <option value="Month">Month View</option>
-                    <option value="Week">Week View</option>
-                    <option value="Day">Day View</option>
-                </select>
+        <div className="px-4 xl:px-6">
+            <div className="flex flex-wrap items-center justify-between gap-2 py-5">
+                <h1 className="me-2 text-lg font-bold dark:text-white">
+                    Project Tasks Timeline
+                </h1>
+                <div className="relative inline-block w-64">
+                    <select
+                        className="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none dark:border-dark-secondary dark:bg-dark-secondary dark:text-white"
+                        value={displayOptions.viewMode}
+                        onChange={handleViewModeChange}
+                    >
+                        <option value={ViewMode.Day}>Day</option>
+                        <option value={ViewMode.Week}>Week</option>
+                        <option value={ViewMode.Month}>Month</option>
+                    </select>
+                </div>
             </div>
 
-            <div className="flex-1 overflow-hidden w-full">
-                <div className="flex h-full">
-                    {/* Task List - Fixed Left Column */}
-                    <div className="flex-none w-[300px] bg-white dark:bg-gray-800 border-r shadow-lg">
-                        <div className="sticky top-0 z-20 border-b bg-gray-50 dark:bg-gray-900 p-4">
-                            <div className="font-medium dark:text-white">Tasks</div>
-                        </div>
-                        <div className="space-y-2 p-2">
-                            {processedTasks.map((task, index) => (
-                                <div key={task.id}
-                                    className="p-2 bg-white dark:bg-gray-800 rounded-lg shadow-sm border"
-                                    style={{ height: ROW_HEIGHT - 16 }}>
-                                    <div className="font-medium dark:text-white truncate">{task.title}</div>
-                                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                                        {task.startDate.toLocaleDateString()} - {task.dueDate.toLocaleDateString()}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Timeline Grid with Horizontal Scroll */}
-                    <div className="flex-1 overflow-x-auto">
-                        <div style={{
-                            width: timelineData.periods.length * CELL_WIDTH,
-                            minWidth: '100%'
-                        }}>
-                            {/* Periods Header */}
-                            <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b">
-                                <div className="flex">
-                                    {timelineData.periods.map((period, index) => (
-                                        <div
-                                            key={index}
-                                            className="text-sm px-4 py-3 border-r dark:text-white font-medium"
-                                            style={{ width: CELL_WIDTH }}
-                                        >
-                                            {period.label}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Timeline Content */}
-                            <div className="relative" style={{ height: processedTasks.length * ROW_HEIGHT }}>
-                                {/* Grid Background */}
-                                <div className="absolute inset-0 grid"
-                                    style={{ gridTemplateColumns: `repeat(${timelineData.periods.length}, ${CELL_WIDTH}px)` }}>
-                                    {timelineData.periods.map((_, index) => (
-                                        <div key={index} className="border-r h-full" />
-                                    ))}
-                                </div>
-
-                                {/* Task Bars */}
-                                {processedTasks.map((task, index) => {
-                                    const { left, width } = getTaskPosition(task);
-                                    return (
-                                        <div
-                                            key={task.id}
-                                            className="absolute h-8 rounded-lg bg-blue-100 dark:bg-blue-900 border border-blue-300 dark:border-blue-700"
-                                            style={{
-                                                left,
-                                                top: index * ROW_HEIGHT + (ROW_HEIGHT - 32) / 2,
-                                                width,
-                                            }}
-                                        >
-                                            <div
-                                                className="h-full rounded-lg bg-blue-500 dark:bg-blue-600"
-                                                style={{ width: `${task.progress}%` }}
-                                            />
-                                            <span className="absolute inset-0 flex items-center justify-center text-sm font-medium text-blue-900 dark:text-blue-100">
-                                                {task.title}
-                                            </span>
-                                        </div>
-                                    );
-                                })}
-                            </div>
-                        </div>
+            <div className="rounded-md bg-white shadow dark:bg-dark-secondary dark:text-white">
+                <div style={{
+                    width: '100%',
+                    height: '100%',
+                    overflowX: 'auto',
+                    overflowY: 'hidden'
+                }}>
+                    <div className={`timeline max-w-[1600px] sm:max-w-[600px] md:max-w-[900px] lg:max-w-[1200px] 2xl:max-w-[1440px]`}>
+                        <Gantt
+                            tasks={ganttTasks}
+                            {...displayOptions}
+                            columnWidth={displayOptions.viewMode === ViewMode.Month || ViewMode.Week || ViewMode.Day ? 150 : 100}
+                            listCellWidth="250px"
+                            barBackgroundColor={isDarkMode ? "#101214" : "#aeb8c2"}
+                            barBackgroundSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
+                        />
                     </div>
                 </div>
-
-                <div className="sticky bottom-0 border-t p-4 bg-white dark:bg-gray-800">
+                <div className="px-4 pb-5 pt-1">
                     <button
+                        className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
                         onClick={() => setIsModalNewTaskOpen(true)}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                     >
                         Add New Task
                     </button>
@@ -1078,4 +1182,5 @@ const TimelineView = ({ id, setIsModalNewTaskOpen }) => {
     );
 };
 
-export default TimelineView;
+export default Timeline;
+
