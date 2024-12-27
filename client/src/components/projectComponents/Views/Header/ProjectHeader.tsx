@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Header from '@/components/Header'
 import { Clock, Filter, Grid3X3, List, Share2, Table } from 'lucide-react'
 
+
 type Props = {
     activeTab: string
     setActiveTab: (tabName: string) => void
@@ -9,12 +10,12 @@ type Props = {
 
 const ProjectHeader = ({ activeTab, setActiveTab }: Props) => {
 
-    const [isModalNewProjectOpen, setIsModalNewProjectOpen] = useState(false)
-
+    
     return (
 
         <div className='px-2 xl:px-2'>
             {/* New project Modal */}
+
 
 
             <div className='pb-6 pt-6 lg:pb-4 lg:pt-8'>
