@@ -47,7 +47,7 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
   };
 
   const selectStyles =
-    'mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-slate-500 dark:text-white dark:focus:outline-none';
+    'mb-4 block w-full rounded border border-gray-300 px-2 py-2 dark:border-dark-tertiary dark:bg-slate-500 dark:text-white dark:focus:outline-none';
   const inputStyles =
     'w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-slate-500 dark:text-white dark:focus:outline-none';
 
@@ -55,7 +55,7 @@ const ModalNewTask = ({ isOpen, onClose, id }: Props) => {
  <Modal isOpen={isOpen} onClose={onClose} name="Create New Task">
       {/* Modal Header with Close Button */}
       <div
-        className="mx-auto max-w-lg bg-white p-6 rounded-lg shadow-lg dark:bg-dark-secondary"
+        className="mx-auto max-w-2xl bg-white p-2 rounded-lg shadow-lg dark:bg-dark-secondary"
         style={{ backgroundColor: 'white' }} 
       >
       <div className="flex justify-between items-center border-b pb-3">
