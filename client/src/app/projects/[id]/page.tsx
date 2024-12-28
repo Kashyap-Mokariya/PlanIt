@@ -4,6 +4,7 @@ import BoardView from '@/components/projectComponents/Views/BoardView/BoardView'
 import React, { useState } from 'react'
 import ListView from '@/components/projectComponents/Views/ListView/ListView'
 import TimelineView from '@/components/projectComponents/Views/TimelineView/TimelineView'
+import ModalNewTask from '@/components/ModalNewTask'
 import TableView from '@/components/projectComponents/Views/TableView/TableView'
 
 type Props = {
@@ -19,6 +20,10 @@ const Project = ({ params }: Props) => {
     return (
         <div>
             {/* Modal NEW TASKS */}
+            <ModalNewTask isOpen={isModalNewTaskOpen}
+            onClose={()=> setIsModalNewTaskOpen(false)}
+            id={id}
+            />
 
             <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
