@@ -48,10 +48,10 @@
   @apply dark:text-neutral-500;
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0px;
   height: 0px;
-} */
+}
 
 html,
 body,
