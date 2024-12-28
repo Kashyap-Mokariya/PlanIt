@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import { useAppSelector } from '@/components/redux';
+import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
 import { useGetTasksQuery } from '@/state/api';
 import { DataGrid, GridColDef } from '@mui/x-data-grid'
 import React from 'react'
@@ -80,13 +81,15 @@ const TableView = ({ id, setIsModalNewTaskOpen }: TableViewProps) => {
         return <div className='dark:text-white'>An error occured while fetching tasks</div>
 
     return (
-        <div className='h-[540px] w-full px-4 pb-8 xl:px-6'>
+        <div className='h-[500px] w-full px-4 pb-8 xl:px-6'>
             <div className='pt-5'>
                 <Header name='Table' isSmallText />
             </div>
             <DataGrid
                 rows={tasks || []}
                 columns={columns}
+                className={dataGridClassNames}
+                sx={dataGridSxStyles(isDarkMode)}
             />
         </div>
     )
