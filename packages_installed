@@ -6,7 +6,8 @@ pnpm i lucide-react
 pnpm i numeral
 pnpm i date-fns
 pnpm i axios
-pnpm i recharts
+pnpm add recharts
+pnpm add -D @types/recharts
 pnpm i react-dnd
 pnpm i react-dnd-html5-backend
 pnpm i gantt-task-react
