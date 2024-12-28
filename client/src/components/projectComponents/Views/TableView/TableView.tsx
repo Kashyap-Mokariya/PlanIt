@@ -10,6 +10,13 @@ type TableViewProps = {
     setIsModalNewTaskOpen: (isOpen: boolean) => void;
 }
 
+const statusColor: any = {
+    "To Do": "#2563EB",
+    "Work In Progress": "#059669",
+    "Under Review": "#D97706",
+    "Completed": "#000000"
+}
+
 const columns: GridColDef[] = [
     {
         field: "title",
@@ -26,7 +33,10 @@ const columns: GridColDef[] = [
         headerName: "Status",
         width: 130,
         renderCell: (params) => (
-            <span className='inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800'>
+            <span 
+                className='inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800'
+                style={{ backgroundColor: statusColor[params.value] || '#FFFFFF', color: '#FFFFFF' }}
+            >
                 {params.value}
             </span>
         )
