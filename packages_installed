@@ -23,3 +23,5 @@ pnpm i -D typescript ts-node
 pnpm i express cors dotenv helmet morgan
 pnpm add -D @types/body-parser
 pnpm i -D rimraf concurrently nodemon @types/cors @types/express @types/morgan @types/node
+pnpm i lodash
+pnpm i -D @types/lodash
