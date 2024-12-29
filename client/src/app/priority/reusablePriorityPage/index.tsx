@@ -1,5 +1,5 @@
 "use client"
-import ModalNewTask from '@/components/ModalNewTask'
+import ModalNewTask from '@/components/ModalNewTask/ModalNewTask'
 import { useAppSelector } from '@/components/redux'
 import { Priority, Task, useGetTasksByUserQuery } from '@/state/api'
 import React, { useState } from 'react'
@@ -15,7 +15,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
     const [view, setView] = useState("list")
     const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false)
 
-    const {data: tasks, isLoading, isError: tasksError} = useGetTasksByUserQuery(userId || 0, {
+    const { data: tasks, isLoading, isError: tasksError } = useGetTasksByUserQuery(userId || 0, {
         skip: userId === null
     })
 
@@ -23,7 +23,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
 
     const filteredTasks = tasks?.filter((task: Task) => task.priority == priority)
 
-    if(tasksError || !tasks)
+    if (tasksError || !tasks)
         return <div>Error fetching tasks</div>
 
     return (
