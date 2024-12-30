@@ -6,12 +6,7 @@
   "scripts": {
     "build": "next build",
     "check": "next lint && tsc --noEmit",
-    "db:generate": "prisma migrate dev",
-    "db:migrate": "prisma migrate deploy",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
     "dev": "next dev --turbo",
-    "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
@@ -25,7 +20,6 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.1.10",
     "@mui/x-data-grid": "^7.23.1",
-    "@prisma/client": "^5.14.0",
     "@reduxjs/toolkit": "^2.5.0",
     "@t3-oss/env-nextjs": "^0.10.1",
     "axios": "^1.7.9",
@@ -63,7 +57,6 @@
     "postcss": "^8.4.39",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
-    "prisma": "^5.14.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.5.3"
