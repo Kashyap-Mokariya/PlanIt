@@ -20,9 +20,6 @@ importers:
       '@mui/x-data-grid':
         specifier: ^7.23.1
         version: 7.23.1(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react@18.3.1))(@mui/material@6.1.10(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mui/system@6.1.10(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@emotion/styled@11.14.0(@emotion/react@11.14.0(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react@18.3.1))(@types/react@18.3.14)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@prisma/client':
-        specifier: ^5.14.0
-        version: 5.22.0(prisma@5.22.0)
       '@reduxjs/toolkit':
         specifier: ^2.5.0
         version: 2.5.0(react-redux@9.2.0(@types/react@18.3.14)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -129,9 +126,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.9
         version: 0.6.9(prettier@3.4.2)
-      prisma:
-        specifier: ^5.14.0
-        version: 5.22.0
       tailwind-merge:
         specifier: ^2.5.5
         version: 2.5.5
@@ -587,30 +581,6 @@ packages:
 
   '@popperjs/core@2.11.8':
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-
-  '@prisma/client@5.22.0':
-    resolution: {integrity: sha512-M0SVXfyHnQREBKxCgyo7sffrKttwE6R8PMq330MIUF0pTwjUhLbW84pFDlf06B27XyCR++VtjugEnIHdr07SVA==}
-    engines: {node: '>=16.13'}
-    peerDependencies:
-      prisma: '*'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
-
-  '@prisma/debug@5.22.0':
-    resolution: {integrity: sha512-AUt44v3YJeggO2ZU5BkXI7M4hu9BF2zzH2iF2V5pyXT/lRTyWiElZ7It+bRH1EshoMRxHgpYg4VB6rCM+mG5jQ==}
-
-  '@prisma/engines-version@5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2':
-    resolution: {integrity: sha512-2PTmxFR2yHW/eB3uqWtcgRcgAbG1rwG9ZriSvQw+nnb7c4uCr3RAcGMb6/zfE88SKlC1Nj2ziUvc96Z379mHgQ==}
-
-  '@prisma/engines@5.22.0':
-    resolution: {integrity: sha512-UNjfslWhAt06kVL3CjkuYpHAWSO6L4kDCVPegV6itt7nD1kSJavd3vhgAEhjglLJJKEdJ7oIqDJ+yHk6qO8gPA==}
-
-  '@prisma/fetch-engine@5.22.0':
-    resolution: {integrity: sha512-bkrD/Mc2fSvkQBV5EpoFcZ87AvOgDxbG99488a5cexp5Ccny+UM6MAe/UFkUC0wLYD9+9befNOqGiIJhhq+HbA==}
-
-  '@prisma/get-platform@5.22.0':
-    resolution: {integrity: sha512-pHhpQdr1UPFpt+zFfnPazhulaZYCUqeIcPpJViYoq9R+D/yw4fjE+CtnsnKzPYm0ddUbeXUzjGVGIRVgPDCk4Q==}
 
   '@react-dnd/asap@5.0.2':
     resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
@@ -2018,11 +1988,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prisma@5.22.0:
-    resolution: {integrity: sha512-vtpjW3XuYCSnMsNVBjLMNkTj6OZbudcPPTPYHqX0CJfpcdWciI1dM8uHETwmDxxiqEwCIE6WvXucWUetJgfu/A==}
-    engines: {node: '>=16.13'}
-    hasBin: true
-
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
@@ -2926,31 +2891,6 @@ snapshots:
     optional: true
 
   '@popperjs/core@2.11.8': {}
-
-  '@prisma/client@5.22.0(prisma@5.22.0)':
-    optionalDependencies:
-      prisma: 5.22.0
-
-  '@prisma/debug@5.22.0': {}
-
-  '@prisma/engines-version@5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2': {}
-
-  '@prisma/engines@5.22.0':
-    dependencies:
-      '@prisma/debug': 5.22.0
-      '@prisma/engines-version': 5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2
-      '@prisma/fetch-engine': 5.22.0
-      '@prisma/get-platform': 5.22.0
-
-  '@prisma/fetch-engine@5.22.0':
-    dependencies:
-      '@prisma/debug': 5.22.0
-      '@prisma/engines-version': 5.22.0-44.605197351a3c8bdd595af2d2a9bc3025bca48ea2
-      '@prisma/get-platform': 5.22.0
-
-  '@prisma/get-platform@5.22.0':
-    dependencies:
-      '@prisma/debug': 5.22.0
 
   '@react-dnd/asap@5.0.2': {}
 
@@ -4457,12 +4397,6 @@ snapshots:
       prettier: 3.4.2
 
   prettier@3.4.2: {}
-
-  prisma@5.22.0:
-    dependencies:
-      '@prisma/engines': 5.22.0
-    optionalDependencies:
-      fsevents: 2.3.3
 
   prop-types@15.8.1:
     dependencies:
