@@ -26,9 +26,12 @@ const ReusablePriorityPage = ({ priority }: Props) => {
     if (tasksError || !tasks)
         return <div>Error fetching tasks</div>
 
-    return (
+return (
         <div className='m-5 p-4'>
-            <ModalNewTask isOpen={isModalNewTaskOpen} onClose={() => setIsModalNewTaskOpen(false)} />
+            <ModalNewTask
+                isOpen={isModalNewTaskOpen}
+                onClose={() => setIsModalNewTaskOpen(false)}
+            />
 
         </div>
     )
