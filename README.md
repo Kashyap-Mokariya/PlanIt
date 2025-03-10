@@ -1,29 +1,117 @@
-# Create T3 App
+# Planit 
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Planit is a project management and task-tracking application built with **Next.js**, **TypeScript**, **Redux**, and **Prisma**, utilizing a **T3 stack** for full-stack development. It allows users to manage tasks, track project progress, and collaborate with teams efficiently.  
 
-## What's next? How do I make an app with this?
+## ✨ Features  
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- 🏗 **Project & Task Management** – Create, update, and organize projects and tasks.  
+- 📅 **Priority Sorting** – Categorize tasks as **urgent**, **high**, **medium**, **low**, or **backlog**.  
+- 📊 **Multiple Views** – Board, List, Table, and Timeline views for managing tasks.  
+- 🔍 **Search & Filtering** – Easily find tasks and projects using a search functionality.  
+- 🏢 **Team Collaboration** – Manage teams and assign tasks to specific members.  
+- 🔐 **Authentication** – Supports authentication via **Clerk**.  
+- ☁️ **Modern UI** – Built with **TailwindCSS**, **MUI**, and **Recharts** for a sleek design.  
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## 🌐 Live Demo  
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+🔗 **Deployed Project:** [Planit](https://plan-it-gamma.vercel.app/)  
+⚠️ **Note:** The backend may take up to **50 seconds** to initialize on the first request due to **Render's automatic instance suspension** when inactive. 
 
-## Learn More
+## 🏗 Tech Stack  
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+| Frontend | Backend | Database | Dev Tools |
+| -------- | ------- | -------- | --------- |
+| Next.js 15 | Node.js (Express) | PostgreSQL (Prisma) | TypeScript |
+| React 18 | tRPC | Prisma ORM | Redux Toolkit |
+| TailwindCSS | Zod | Drizzle ORM | ESLint & Prettier |
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## 🚀 Installation & Setup  
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### Prerequisites  
 
-## How do I deploy this?
+Ensure you have the following installed:  
+- **Node.js** (v18 or later)  
+- **pnpm** (Package Manager)  
+- **PostgreSQL** (Database)  
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 1️⃣ Clone the Repository  
+
+```sh
+git clone https://github.com/your-username/planit.git
+cd planit
+```
+
+### 2️⃣ Install Dependencies  
+
+```sh
+pnpm install
+```
+
+### 3️⃣ Set Up Environment Variables  
+
+Copy `.env.example` and rename it to `.env`. Update the values accordingly.  
+
+### 4️⃣ Run the Database  
+
+Start the database using Prisma migrations:  
+
+```sh
+pnpm run db:migrate
+pnpm run db:seed
+```
+
+### 5️⃣ Start the Development Server  
+
+For the frontend:  
+
+```sh
+cd client
+pnpm run dev
+```
+
+For the backend:  
+
+```sh
+cd server
+pnpm run dev
+```
+
+## 🧑‍💻 Project Structure  
+
+```
+planit/
+├── client/       # Frontend (Next.js, React, TailwindCSS)
+│   ├── src/
+│   │   ├── app/  # Pages & Layout
+│   │   ├── components/ # Reusable UI Components
+│   │   ├── state/ # Redux Store & API Calls
+│   │   ├── styles/ # Global Styles
+│   ├── package.json
+│   ├── tailwind.config.ts
+│   ├── next.config.js
+│   └── tsconfig.json
+│
+├── server/       # Backend (Express, Prisma, PostgreSQL)
+│   ├── src/
+│   │   ├── controllers/ # API Controllers
+│   │   ├── routes/ # API Endpoints
+│   │   ├── server/ # Database Connection
+│   │   ├── prisma/ # ORM Config & Migrations
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── start-database.sh
+│
+├── .env.example  # Environment Variables Template
+├── README.md     # Project Documentation
+└── pnpm-lock.yaml
+```
+
+## 📌 API Routes  
+
+| Route | Method | Description |
+|-------|--------|------------|
+| `/api/projects` | `GET` | Get all projects |
+| `/api/projects/:id` | `GET` | Get a single project |
+| `/api/tasks` | `GET` | Get all tasks |
+| `/api/tasks` | `POST` | Create a new task |
+| `/api/teams` | `GET` | Get all teams |
